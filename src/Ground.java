@@ -4,7 +4,7 @@ public class Ground {
 
 	private int width;
 	private int height;
-	private int[][] map; // 0: close   1: mine   2: open
+	private int[][] map; // 0: close   1: mine   2: open 3:flag
 	private int[][] mineNumber;
 	private boolean[][] expanded;
 
@@ -16,7 +16,7 @@ public class Ground {
 		generateMap(num);
 		countMine();
 	}
-
+	
 	private void generateMap(int num) {
 		Random rand = new Random();
 		
@@ -46,7 +46,16 @@ public class Ground {
 			}
 		}
 	}
-
+	private void gen_flag() {
+		while (!succeed) {
+			x = rand.nextInt(width);
+			y = rand.nextInt(height);
+			if (map[x][y] != 1) {//not on mine
+				map[x][y] = 3;//flag
+				succeed = true;
+			}
+		}
+	}
 	private void countMine() {
 		mineNumber = new int[width][height];
 
